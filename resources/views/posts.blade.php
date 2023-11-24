@@ -10,7 +10,7 @@
 </head>
 <body>
     <article>
-            <h1><a href="/post">Post 1</a></h1>
+            <h1><a href="/posts/post_1">Post 1</a></h1>
 
             <p>
                 Deserunt cillum sint aliqua laborum minim nostrud commodo consequat aliqua dolore ullamco.
@@ -28,7 +28,7 @@
     </article>
 
     <article>
-        <h1><a href="/post">Post 2</a></h1>
+        <h1><a href="/posts/post_2">Post 2</a></h1>
 
         <p>
             Deserunt cillum sint aliqua laborum minim nostrud commodo consequat aliqua dolore ullamco.
@@ -46,7 +46,7 @@
     </article>
 
     <article>
-        <h1><a href="/post">Post 3</a></h1>
+        <h1><a href="/posts/post_3">Post 3</a></h1>
 
         <p>
             Deserunt cillum sint aliqua laborum minim nostrud commodo consequat aliqua dolore ullamco.

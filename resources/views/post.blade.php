@@ -10,21 +10,8 @@
 </head>
 <body>
     <article>
-            <h1><a href="/post">1 Post</a></h1>
+            <?= $post; ?>
 
-            <p>
-                Deserunt cillum sint aliqua laborum minim nostrud commodo consequat aliqua dolore ullamco.
-                Excepteur nostrud eiusmod proident fugiat. Officia fugiat nulla est eu laboris in cupidatat sint velit et minim.
-                Ea nulla cillum mollit velit esse dolore. Sint dolore sit voluptate id officia minim est qui.
-                Elit elit consectetur quis qui proident ullamco labore amet ea eu cillum fugiat. Ipsum laborum est sit nisi.
-            </p>
-
-            <p>
-                Deserunt cillum sint aliqua laborum minim nostrud commodo consequat aliqua dolore ullamco.
-                Excepteur nostrud eiusmod proident fugiat. Officia fugiat nulla est eu laboris in cupidatat sint velit et minim.
-                Ea nulla cillum mollit velit esse dolore. Sint dolore sit voluptate id officia minim est qui.
-                Elit elit consectetur quis qui proident ullamco labore amet ea eu cillum fugiat. Ipsum laborum est sit nisi.
-            </p>
     </article>
 
     <a href="/">Go Back</a>
