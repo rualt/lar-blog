@@ -4,21 +4,49 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post
 {
+
     /**
-     * Get content of all Posts
+     * __construct
      *
-     * @return SplFileInfo
+     * @param  string $title
+     * @param  string $excerpt
+     * @param  string $date
+     * @param  string $body
+     * @param  string $slug
+     * @return void
      */
-    public static function all(): array
+    public function __construct(public $title, public $excerpt, public $date, public $body, public $slug)
     {
-        $files = File::files(resource_path('posts'));
-        return array_map(
-            fn ($file) => $file->getContents(),
-            $files
-        );
+        $this->title = $title;
+        $this->excerpt = $excerpt;
+        $this->date = $date;
+        $this->body = $body;
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get date of each Posts (body and metadata)
+     *
+     * @return Object
+     */
+    public static function all(): iterable
+    {
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path('posts')))
+            ->map(fn($file) => YamlFrontMatter::parseFile($file))
+            ->map(fn($document) => new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date,
+                $document->body(),
+                $document->slug,
+            ))
+            ->sortByDesc('date');
+        });
     }
 
     /**
@@ -30,12 +58,8 @@ class Post
      *
      * @return string page html content
      */
-    public static function find(string $slug): string
+    public static function find(string $slug): Post
     {
-        if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
-            throw new ModelNotFoundException();
-        }
-
-        return cache()->remember("post.{$slug}", 1, fn() => file_get_contents($path));
+        return static::all()->firstWhere('slug', $slug);
     }
 }
