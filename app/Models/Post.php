@@ -50,16 +50,34 @@ class Post
     }
 
     /**
+     * Get content of the post page based on passed slug value
+     *
+     * @param  string $slug Post page slug
+     *
+     * @return Post|null page body and metadata
+     */
+    public static function find(string $slug): Post|null
+    {
+        return static::all()->firstWhere('slug', $slug);
+    }
+
+    /**
      * Get content of the post page based pn passed slug value
      *
      * @param  string $slug Post page slug
      *
-     * @throws ModelNotFoundException if post page is not exists
+     * @throws ModelNotFoundException if post by slug is not exists
      *
-     * @return string page html content
+     * @return Post page body and metadata
      */
-    public static function find(string $slug): Post
+    public static function findOrFail(string $slug): Post
     {
-        return static::all()->firstWhere('slug', $slug);
+        $post = static::find($slug);
+
+        if (is_null($post)) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
     }
 }
